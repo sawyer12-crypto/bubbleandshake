@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bubble and Shake - Premium Bubble Tea & Shakes</title>
+    
+    <!-- Security Headers -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()">
+    
+    <!-- Content Security Policy -->
+    <meta http-equiv="Content-Security-Policy" content="
+        default-src 'self';
+        script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdn.emailjs.com;
+        style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+        font-src 'self' https://fonts.gstatic.com;
+        img-src 'self' data: https:;
+        connect-src 'self' https://api.emailjs.com;
+        frame-ancestors 'self';
+    ">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- EmailJS for sending emails -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="logo">BUBBLE & SHAKE</div>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#menu" class="nav-link">Menu</a></li>
+                <li><a href="#about" class="nav-link">Info</a></li>
+                <li><a href="#" class="nav-link" onclick="event.preventDefault(); openSection('raw-materials')">Raw Materials</a></li>
+                <li><a href="#" class="nav-link" onclick="event.preventDefault(); openSection('faqs')">FAQs</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="bubbles-container">
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+        </div>
+        <div class="boba-pearls-container">
+            <div class="boba-pearl"></div>
+            <div class="boba-pearl"></div>
+            <div class="boba-pearl"></div>
+            <div class="boba-pearl"></div>
+            <div class="boba-pearl"></div>
+            <div class="boba-pearl"></div>
+            <div class="boba-pearl"></div>
+            <div class="boba-pearl"></div>
+        </div>
+        <div class="decorative-elements">
+            <div class="straw straw-1"></div>
+            <div class="straw straw-2"></div>
+            <div class="drink-cup cup-1"></div>
+            <div class="drink-cup cup-2"></div>
+        </div>
+        <div class="hero-content">
+            <h1 class="hero-title">BUBBLE & SHAKE</h1>
+            <p class="hero-subtitle">PREMIUM BUBBLE TEA CRAFTED WITH PASSION</p>
+            <button class="cta-button" onclick="scrollToSection('menu')">Explore Menu</button>
+        </div>
+        <div class="hero-background"></div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu" class="menu-section">
+        <div class="container">
+            <!-- Physical menu image - view the real menu -->
+            <div class="physical-menu-wrap">
+                <h2 class="section-title">OUR MENU</h2>
+                <p class="section-subtitle">View our full menu below, then scroll down to explore each drink</p>
+                <div class="physical-menu-image-wrap">
+                    <img src="images/physical-menu.png" alt="Bubble & Shake - Full Menu" class="physical-menu-image">
+                </div>
+            </div>
+
+            <h2 class="section-title section-title-divider">BROWSE DRINKS</h2>
+            <p class="section-subtitle">Explore our curated collection • Hover to discover each drink's unique features</p>
+            
+            <!-- Category Tabs -->
+            <div class="category-tabs">
+                <button class="category-tab active" data-category="all">All</button>
+                <button class="category-tab" data-category="milk-tea">Signature milk teas</button>
+                <button class="category-tab" data-category="fruit-tea">Signature fruit teas</button>
+                <button class="category-tab" data-category="pure-sparkler">Pure sparkler</button>
+                <button class="category-tab" data-category="syrup-sparkler">Syrup sparkler</button>
+                <button class="category-tab" data-category="add-ons">Add-ons</button>
+            </div>
+
+            <!-- Menu Items Grid -->
+            <div class="menu-grid" id="menu-grid">
+                <!-- Items will be dynamically loaded -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Explore Section -->
+    <section id="about" class="explore-section">
+        <div class="explore-container">
+            <h2 class="section-title">DISCOVER</h2>
+            <p class="section-subtitle">Explore everything Bubble & Shake has to offer</p>
+            
+            <div class="explore-grid">
+                <div class="explore-card" onclick="openSection('about')">
+                    <div class="explore-icon">📖</div>
+                    <h3 class="explore-title">About Us</h3>
+                    <p class="explore-description">Learn about our story and passion</p>
+                </div>
+
+                <div class="explore-card" onclick="openSection('gallery')">
+                    <div class="explore-icon">📸</div>
+                    <h3 class="explore-title">Gallery</h3>
+                    <p class="explore-description">View our events and moments</p>
+                </div>
+
+                <div class="explore-card" onclick="openSection('catering')">
+                    <div class="explore-icon-text">CATERING</div>
+                    <h3 class="explore-title">CATERING</h3>
+                    <p class="explore-description">Professional service for your special event</p>
+                </div>
+
+                <div class="explore-card" onclick="openSection('raw-materials')">
+                    <div class="explore-icon">🥤</div>
+                    <h3 class="explore-title">Raw Materials</h3>
+                    <p class="explore-description">Premium ingredients for your bubble tea business</p>
+                </div>
+
+                <div class="explore-card" onclick="openSection('gifts')">
+                    <div class="explore-icon">🎁</div>
+                    <h3 class="explore-title">Gift Cards</h3>
+                    <p class="explore-description">Perfect gift for bubble tea lovers</p>
+                </div>
+
+                <div class="explore-card" onclick="openSection('diy-kit')">
+                    <div class="explore-icon">📦</div>
+                    <h3 class="explore-title">DIY Kit</h3>
+                    <p class="explore-description">Take home and make your own fruit tea</p>
+                </div>
+
+                <div class="explore-card" onclick="openSection('contact')">
+                    <div class="explore-icon">💬</div>
+                    <h3 class="explore-title">Get In Touch</h3>
+                    <p class="explore-description">We'd love to hear from you</p>
+                </div>
+
+                <div class="explore-card" onclick="openSection('faqs')">
+                    <div class="explore-icon">❓</div>
+                    <h3 class="explore-title">FAQs</h3>
+                    <p class="explore-description">Frequently asked questions</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Full Page Section Views -->
+    <!-- About Us Page -->
+    <div class="section-page" id="about-page">
+        <div class="section-page-overlay"></div>
+        <div class="section-page-content">
+            <button class="section-close" onclick="closeSection()">&times;</button>
+            <div class="section-page-inner">
+                <h1 class="page-title">About Us</h1>
+                <div class="page-content">
+                    <p class="page-intro">At Bubble & Shake, we're passionate about bringing you the finest bubble tea and shakes experience.</p>
+                    <p>Since our founding, we've been committed to using only the highest quality ingredients and authentic recipes. Every drink is crafted with care, from our crafted milk tea's to our perfectly chewy tapioca pearls.</p>
+                    <div class="about-highlights-grid">
+                        <div class="highlight-card">
+                            <span class="highlight-icon-large">🌿</span>
+                            <h3>High Quality Ingredients</h3>
+                            <p>WE SOURCE ONLY THE FINEST INGREDIENTS ENSURING THE HIGHEST QUALITY</p>
+                        </div>
+                        <div class="highlight-card">
+                            <span class="highlight-icon-large">🎨</span>
+                            <h3>Fully Customizable</h3>
+                            <p>Adjust ice levels and toppings to your preference</p>
+                        </div>
+                        <div class="highlight-card">
+                            <span class="highlight-icon-large">⚡</span>
+                            <h3>Quick Service</h3>
+                            <p>Fast preparation without compromising on quality</p>
+                        </div>
+                        <div class="highlight-card">
+                            <span class="highlight-icon-large">💛</span>
+                            <h3>Made with Love</h3>
+                            <p>Every drink is prepared with passion and attention to detail</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Gallery Page -->
+    <div class="section-page" id="gallery-page">
+        <div class="section-page-overlay"></div>
+        <div class="section-page-content">
+            <button class="section-close" onclick="closeSection()">&times;</button>
+            <div class="section-page-inner">
+                <h1 class="page-title">Gallery</h1>
+                <p class="page-intro">Explore our drinks, add-ons, and moments</p>
+                <div class="gallery-full-grid" id="gallery-grid">
+                    <!-- Gallery items loaded by script.js from menu images + galleryExtraImages -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Catering Page -->
+    <div class="section-page" id="catering-page">
+        <div class="section-page-overlay"></div>
+        <div class="section-page-content">
+            <button class="section-close" onclick="closeSection()">&times;</button>
+            <div class="section-page-inner">
+                <h1 class="page-title">CATERING SERVICES</h1>
+                <p class="page-intro">Make your event special with our professional catering services</p>
+
+                <div class="catering-tc-wrap">
+                    <h2 class="catering-tc-heading">Bubble and Shake – Catering Terms &amp; Conditions</h2>
+                    <div class="catering-tc-tabs" role="tablist" aria-label="Catering terms sections">
+                        <button type="button" class="catering-tc-tab active" role="tab" aria-selected="true" data-catering-tc="1" onclick="showCateringTcTab(1)">1</button>
+                        <button type="button" class="catering-tc-tab" role="tab" aria-selected="false" data-catering-tc="2" onclick="showCateringTcTab(2)">2</button>
+                        <button type="button" class="catering-tc-tab" role="tab" aria-selected="false" data-catering-tc="3" onclick="showCateringTcTab(3)">3</button>
+                        <button type="button" class="catering-tc-tab" role="tab" aria-selected="false" data-catering-tc="5" onclick="showCateringTcTab(5)">5</button>
+                        <button type="button" class="catering-tc-tab" role="tab" aria-selected="false" data-catering-tc="6" onclick="showCateringTcTab(6)">6</button>
+                        <button type="button" class="catering-tc-tab" role="tab" aria-selected="false" data-catering-tc="7" onclick="showCateringTcTab(7)">7</button>
+                        <button type="button" class="catering-tc-tab" role="tab" aria-selected="false" data-catering-tc="8" onclick="showCateringTcTab(8)">8</button>
+                        <button type="button" class="catering-tc-tab" role="tab" aria-selected="false" data-catering-tc="9" onclick="showCateringTcTab(9)">9</button>
+                    </div>
+                    <p class="catering-tc-tab-hint" id="catering-tc-tab-label">Pricing</p>
+                    <div class="catering-tc-panels">
+                        <div class="catering-tc-panel active" id="catering-tc-panel-1" role="tabpanel">
+                            <h3 class="catering-tc-panel-title">1) Pricing</h3>
+                            <ul class="catering-tc-list">
+                                <li>350ml Fruit Tea with Popping Boba – K60</li>
+                                <li>500ml Fruit Tea with Popping Boba – K80</li>
+                                <li>350ml Milk Tea with Tapioca – K70</li>
+                                <li>500ml Milk Tea with Tapioca – K90</li>
+                            </ul>
+                        </div>
+                        <div class="catering-tc-panel" id="catering-tc-panel-2" role="tabpanel" hidden>
+                            <h3 class="catering-tc-panel-title">2) Minimum Order</h3>
+                            <p>A minimum of <strong>20 drinks per order</strong> is required.</p>
+                            <h4 class="catering-tc-subtitle">Flavor Selection</h4>
+                            <ul class="catering-tc-list">
+                                <li>Maximum of <strong>4 flavors</strong> per 20 drinks.</li>
+                                <li>Additional flavors may be subject to approval and availability.</li>
+                            </ul>
+                        </div>
+                        <div class="catering-tc-panel" id="catering-tc-panel-3" role="tabpanel" hidden>
+                            <h3 class="catering-tc-panel-title">3) Order Notice</h3>
+                            <p>All catering orders must be placed at least <strong>48 hours</strong> in advance.</p>
+                        </div>
+                        <div class="catering-tc-panel" id="catering-tc-panel-5" role="tabpanel" hidden>
+                            <h3 class="catering-tc-panel-title">5) Event Setup Option</h3>
+                            <p>We offer on-site setup for events.</p>
+                            <p>Please send an inquiry in advance for availability, pricing, and setup requirements.</p>
+                        </div>
+                        <div class="catering-tc-panel" id="catering-tc-panel-6" role="tabpanel" hidden>
+                            <h3 class="catering-tc-panel-title">6) Delivery &amp; Collection</h3>
+                            <p>Delivery is available at an additional fee (based on location).</p>
+                        </div>
+                        <div class="catering-tc-panel" id="catering-tc-panel-7" role="tabpanel" hidden>
+                            <h3 class="catering-tc-panel-title">7) Payment Terms</h3>
+                            <ul class="catering-tc-list">
+                                <li>Full payment is required to confirm all catering orders.</li>
+                                <li>Orders are only secured once payment has been received.</li>
+                            </ul>
+                        </div>
+                        <div class="catering-tc-panel" id="catering-tc-panel-8" role="tabpanel" hidden>
+                            <h3 class="catering-tc-panel-title">8) Changes &amp; Cancellations</h3>
+                            <ul class="catering-tc-list">
+                                <li>Any changes must be requested at least <strong>24 hours</strong> in advance to be guaranteed.</li>
+                                <li>Changes requested within 24 hours are not guaranteed and will be subject to availability.</li>
+                                <li>Late cancellations may not be accommodated. <strong>No refunds.</strong></li>
+                            </ul>
+                        </div>
+                        <div class="catering-tc-panel" id="catering-tc-panel-9" role="tabpanel" hidden>
+                            <h3 class="catering-tc-panel-title">9) Product Quality</h3>
+                            <ul class="catering-tc-list">
+                                <li>Drinks are best consumed fresh. We recommend serving immediately upon delivery or pickup.</li>
+                                <li>Bubble and Shake is not responsible for quality once drinks have been held for extended periods after collection or delivery.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="catering-full-grid">
+                    <div class="catering-full-card">
+                        <h3>BIRTHDAY PARTIES</h3>
+                        <p>Custom drink stations for celebrations of all sizes. We'll bring the flavor to your special day.</p>
+                        <ul class="catering-features">
+                            <li>Custom menu selection</li>
+                            <li>Professional staff</li>
+                            <li>Setup & cleanup included</li>
+                            <li>Decorative drink station</li>
+                        </ul>
+                    </div>
+                    <div class="catering-full-card">
+                        <h3>CORPORATE EVENTS</h3>
+                        <p>Professional service for meetings, conferences, and team events. Keep your team refreshed and energized.</p>
+                        <ul class="catering-features">
+                            <li>Bulk ordering options</li>
+                            <li>Delivery available</li>
+                            <li>Customizable drinks and names true to your brand</li>
+                        </ul>
+                    </div>
+                    <div class="catering-full-card">
+                        <h3>WEDDINGS</h3>
+                        <p>Create signature drinks for your special day. WE WILL MAKE YOUR WEDDING EVENT UNFORGETTABLE.</p>
+                        <ul class="catering-features">
+                            <li>Signature drink creation</li>
+                            <li>Full bar service</li>
+                            <li>Elegant presentation</li>
+                            <li>Tasting session fee waived if minimum order is met</li>
+                        </ul>
+                    </div>
+                </div>
+                <button class="page-action-button" onclick="openCateringQuote()">Request a Quote</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Catering Quote Form -->
+    <div class="section-page" id="catering-quote-page">
+        <div class="section-page-overlay"></div>
+        <div class="section-page-content catering-quote-content">
+            <button class="section-close" onclick="closeCateringQuote()">&times;</button>
+            <div class="section-page-inner">
+                <h1 class="page-title">REQUEST A QUOTE</h1>
+                <p class="page-intro">Fill out the form below and we'll get back to you within 24 hours</p>
+                
+                <form id="catering-quote-form" class="catering-quote-form">
+                    <!-- Client Information -->
+                    <div class="form-section">
+                        <h3 class="form-section-title">CLIENT INFORMATION</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Full Name *</label>
+                                <input type="text" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Email *</label>
+                                <input type="email" name="email" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Phone Number *</label>
+                                <input type="tel" name="phone" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Company/Organization</label>
+                                <input type="text" name="company">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Event Details -->
+                    <div class="form-section">
+                        <h3 class="form-section-title">EVENT DETAILS</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Event Type *</label>
+                                <select name="event-type" required>
+                                    <option value="">Select event type</option>
+                                    <option value="birthday">Birthday Party</option>
+                                    <option value="corporate">Corporate Event</option>
+                                    <option value="wedding">Wedding</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Event Date *</label>
+                                <input type="date" name="event-date" id="event-date" min="" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Number of Guests *</label>
+                                <input type="number" name="guests" min="1" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Event Location *</label>
+                                <input type="text" name="location" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Drink Selection -->
+                    <div class="form-section">
+                        <h3 class="form-section-title">SELECT DRINKS</h3>
+                        <p class="form-section-description">Choose drinks from our menu and specify quantities</p>
+                        <div id="drink-selection-container">
+                            <!-- Drink selection items will be added here by JavaScript -->
+                        </div>
+                        <button type="button" class="add-drink-button" onclick="addDrinkSelection()">+ Add Another Drink</button>
+                    </div>
+
+                    <!-- Additional Notes -->
+                    <div class="form-section">
+                        <h3 class="form-section-title">ADDITIONAL INFORMATION</h3>
+                        <div class="form-group">
+                            <label>Special Requests or Dietary Requirements</label>
+                            <textarea name="notes" rows="4" placeholder="Let us know any special requirements or preferences..."></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Order Summary -->
+                    <div class="form-section order-summary">
+                        <h3 class="form-section-title">ORDER SUMMARY</h3>
+                        <div id="order-summary-items" class="order-summary-items">
+                            <p class="no-drinks-message">No drinks selected yet. Add drinks above to see your total.</p>
+                        </div>
+                        <div class="order-total">
+                            <span class="order-total-label">TOTAL:</span>
+                            <span class="order-total-price" id="order-total-price">K0</span>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="form-button-secondary" onclick="closeCateringQuote()">Cancel</button>
+                        <button type="submit" class="form-button-primary">Submit Quote Request</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Gift Cards Page -->
+    <div class="section-page" id="gifts-page">
+        <div class="section-page-overlay"></div>
+        <div class="section-page-content catering-quote-content">
+            <button class="section-close" onclick="closeSection()">&times;</button>
+            <div class="section-page-inner">
+                <h1 class="page-title">Gift Cards</h1>
+                <p class="page-intro">The perfect gift for bubble tea lovers! Fill out the form below and we'll get back to you.</p>
+                <div class="gift-cards-layout">
+                    <div class="gift-card-display">
+                        <div class="gift-card-large">
+                            <div class="gift-card-large-icon">🎁</div>
+                            <h2>Digital Gift Card</h2>
+                            <p>Instant Delivery • No Expiration</p>
+                        </div>
+                        <div class="gift-features-full">
+                            <h4>Terms and Conditions</h4>
+                            <ul>
+                                <li>• Minimum Value: K200</li>
+                                <li>• Validity Period: Vouchers must be redeemed within 6 months from the date of purchase.</li>
+                                <li>• Where to Use: Valid for in-store purchases and online orders.</li>
+                                <li>• Payments Accepted: Purchase using Mobile Money or Cash only.</li>
+                                <li>• Non-Refundable: Vouchers cannot be exchanged for cash.</li>
+                                <li>• Three-Time Use: Each voucher is valid for three redemption transactions.</li>
+                                <li>• No Change Issued: If the purchase value is less than the voucher amount, no change will be given.</li>
+                                <li>• Lost or Damaged Vouchers: Bubble & Shake is not responsible for lost or damaged vouchers.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <form id="gift-card-order-form" class="catering-quote-form gift-card-form">
+                        <div class="form-section">
+                            <h3 class="form-section-title">YOUR INFORMATION</h3>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Full Name *</label>
+                                    <input type="text" name="name" required placeholder="Your name">
+                                </div>
+                                <div class="form-group">
+                                    <label>Email *</label>
+                                    <input type="email" name="email" required placeholder="your@email.com">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Phone Number *</label>
+                                    <input type="tel" name="phone" required placeholder="+260 ...">
+                                </div>
+                                <div class="form-group">
+                                    <label>Business Name (optional)</label>
+                                    <input type="text" name="business" placeholder="If applicable">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-section">
+                            <h3 class="form-section-title">GIFT CARD CHOICE</h3>
+                            <p class="form-section-description">Select the amount you want</p>
+                            <div class="gift-amount-grid">
+                                <div class="gift-amount-option">
+                                    <input type="radio" name="amount" id="amount-200" value="200" required>
+                                    <label for="amount-200">K200</label>
+                                </div>
+                                <div class="gift-amount-option">
+                                    <input type="radio" name="amount" id="amount-500" value="500">
+                                    <label for="amount-500">K500</label>
+                                </div>
+                                <div class="gift-amount-option">
+                                    <input type="radio" name="amount" id="amount-1000" value="1000">
+                                    <label for="amount-1000">K1,000</label>
+                                </div>
+                                <div class="gift-amount-option">
+                                    <input type="radio" name="amount" id="amount-2000" value="2000">
+                                    <label for="amount-2000">K2,000</label>
+                                </div>
+                                <div class="gift-amount-option custom">
+                                    <input type="radio" name="amount" id="amount-custom" value="custom">
+                                    <label for="amount-custom">Custom</label>
+                                </div>
+                            </div>
+                            <div id="gift-card-custom-amount-wrap" class="form-group gift-custom-amount-wrap" style="display: none;">
+                                <label>Custom Amount (K) *</label>
+                                <input type="number" name="custom-amount" id="gift-card-custom-amount" min="200" step="1" placeholder="Min K200">
+                            </div>
+                        </div>
+                        <div class="form-section">
+                            <h3 class="form-section-title">ADDITIONAL INFORMATION</h3>
+                            <div class="form-group">
+                                <label>Message or special instructions</label>
+                                <textarea name="notes" rows="3" placeholder="e.g. Recipient name, delivery preference..."></textarea>
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <button type="button" class="form-button-secondary" onclick="closeSection()">Cancel</button>
+                            <button type="submit" class="form-button-primary">Submit Gift Card Request</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- DIY Kit Page -->
+    <div class="section-page" id="diy-kit-page">
+        <div class="section-page-overlay"></div>
+        <div class="section-page-content">
+            <button class="section-close" onclick="closeSection()">&times;</button>
+            <div class="section-page-inner">
+                <h1 class="page-title">DIY Kit</h1>
+                <p class="page-intro">Take home and make your own fruit tea or milk tea. Each card lists exactly what’s included.</p>
+                <div class="diy-kit-grid" id="diy-kit-grid">
+                    <!-- Cards filled by script.js from diyKits array -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Page -->
+    <div class="section-page" id="contact-page">
+        <div class="section-page-overlay"></div>
+        <div class="section-page-content">
+            <button class="section-close" onclick="closeSection()">&times;</button>
+            <div class="section-page-inner">
+                <h1 class="page-title">Get In Touch</h1>
+                <p class="page-intro">We'd love to hear from you!</p>
+                <div class="contact-layout">
+                    <div class="contact-info-full">
+                        <div class="contact-info-card">
+                            <span class="contact-icon">📍</span>
+                            <h3>Location</h3>
+                            <p>Arcades Shopping Center<br>11A Great East Road</p>
+                        </div>
+                        <div class="contact-info-card">
+                            <span class="contact-icon">📞</span>
+                            <h3>Phone</h3>
+                            <p><a href="tel:+260963553209">+260 963553209</a></p>
+                        </div>
+                        <div class="contact-info-card">
+                            <span class="contact-icon">⏰</span>
+                            <h3>Hours</h3>
+                            <p>Sunday – Thursday: 11am – 7:30pm<br>Friday & Saturday: 11am – 8:00pm</p>
+                        </div>
+                        <div class="contact-info-card">
+                            <span class="contact-icon">✉️</span>
+                            <h3>Email</h3>
+                            <p>bubbleandshakeinquiry@gmail.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-form-full">
+                        <h3>Send us a message</h3>
+                        <form id="contact-form-page">
+                            <input type="text" name="name" placeholder="Your Name" required>
+                            <input type="email" name="email" placeholder="Your Email" required>
+                            <input type="text" name="subject" placeholder="Subject">
+                            <textarea name="message" placeholder="Your Message" rows="6" required></textarea>
+                            <button type="submit" class="page-action-button">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Raw Materials Page -->
+    <div class="section-page" id="raw-materials-page">
+        <div class="section-page-overlay"></div>
+        <div class="section-page-content">
+            <button class="section-close" onclick="closeSection()">&times;</button>
+            <div class="section-page-inner">
+                <h1 class="page-title">RAW MATERIALS</h1>
+                <p class="page-intro">Premium ingredients for your bubble tea business • Bulk orders available</p>
+                
+                <div class="raw-materials-info">
+                    <p class="page-content">We supply high-quality raw materials for bubble tea businesses. All our products are sourced from trusted suppliers and meet the highest quality standards.</p>
+                    <p class="page-content">Whether you're starting a new bubble tea shop or need to restock your inventory, we offer competitive bulk pricing and reliable delivery.</p>
+                </div>
+                <h3 class="raw-materials-categories-title">Browse by category</h3>
+                <div id="raw-materials-browse-wrap">
+                    <div class="raw-materials-categories" id="raw-materials-categories">
+                        <!-- Category cards filled by script.js -->
+                    </div>
+                    <div class="raw-materials-products-wrap" id="raw-materials-products-wrap" style="display: none;">
+                        <button type="button" class="raw-mat-back-btn" onclick="showRawMaterialsCategories()">← Back to categories</button>
+                        <h4 class="raw-mat-products-title" id="raw-mat-products-title"></h4>
+                        <div class="raw-materials-products" id="raw-materials-products">
+                            <!-- Product cards filled when category is clicked -->
+                        </div>
+                        <div class="raw-materials-cta">
+                            <button class="page-action-button" onclick="openRawMaterialsOrder()">Place Order</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="raw-materials-cta" id="raw-materials-cta-main">
+                    <button class="page-action-button" onclick="openRawMaterialsOrder()">Place Order</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Raw Materials Order Form -->
+    <div class="section-page" id="raw-materials-order-page">
+        <div class="section-page-overlay"></div>
+        <div class="section-page-content catering-quote-content">
+            <button class="section-close" onclick="closeRawMaterialsOrder()">&times;</button>
+            <div class="section-page-inner">
+                <h1 class="page-title">RAW MATERIALS ORDER</h1>
+                <p class="page-intro">Fill out the form below and we'll get back to you with pricing and availability</p>
+                
+                <form id="raw-materials-order-form" class="catering-quote-form">
+                    <!-- Client Information -->
+                    <div class="form-section">
+                        <h3 class="form-section-title">CLIENT INFORMATION</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Full Name *</label>
+                                <input type="text" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Email *</label>
+                                <input type="email" name="email" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Phone Number *</label>
+                                <input type="tel" name="phone" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Business Name</label>
+                                <input type="text" name="business">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Material Selection -->
+                    <div class="form-section">
+                        <h3 class="form-section-title">SELECT RAW MATERIALS</h3>
+                        <p class="form-section-description">Choose materials from our catalog and specify quantities</p>
+                        <div id="material-selection-container">
+                            <!-- Material selection items will be added here by JavaScript -->
+                        </div>
+                        <button type="button" class="add-drink-button" onclick="addMaterialSelection()">+ Add Another Material</button>
+                    </div>
+
+                    <!-- Delivery Information -->
+                    <div class="form-section">
+                        <h3 class="form-section-title">DELIVERY INFORMATION</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Delivery Address *</label>
+                                <input type="text" name="delivery-address" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Preferred Delivery Date</label>
+                                <input type="date" name="delivery-date" id="raw-materials-delivery-date">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Delivery Notes</label>
+                            <textarea name="delivery-notes" rows="3" placeholder="Any special delivery instructions..."></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Additional Notes -->
+                    <div class="form-section">
+                        <h3 class="form-section-title">ADDITIONAL INFORMATION</h3>
+                        <div class="form-group">
+                            <label>Special Requests or Questions</label>
+                            <textarea name="notes" rows="4" placeholder="Any questions about products, bulk pricing, or special requirements..."></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Order Summary -->
+                    <div class="form-section order-summary">
+                        <h3 class="form-section-title">ORDER SUMMARY</h3>
+                        <div id="material-order-summary-items" class="order-summary-items">
+                            <p class="no-drinks-message">No materials selected yet. Add materials above to see your order.</p>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="form-button-secondary" onclick="closeRawMaterialsOrder()">Cancel</button>
+                        <button type="submit" class="form-button-primary">Submit Order Request</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- FAQs Page -->
+    <div class="section-page" id="faqs-page">
+        <div class="section-page-overlay"></div>
+        <div class="section-page-content">
+            <button class="section-close" onclick="closeSection()">&times;</button>
+            <div class="section-page-inner">
+                <h1 class="page-title">FAQS</h1>
+                <p class="page-intro">Find answers to commonly asked questions about our drinks, services, and policies</p>
+                
+                <!-- Category Selection -->
+                <div class="faq-category-selection" id="faq-categories">
+                    <div class="faq-category-grid">
+                        <div class="faq-category-card" onclick="showFAQCategory('general')">
+                            <div class="category-card-icon">💬</div>
+                            <h3 class="category-card-title">General Questions</h3>
+                            <p class="category-card-desc">Hours, halal, delivery, payments & more</p>
+                            <div class="category-card-count">6 questions</div>
+                        </div>
+
+                        <div class="faq-category-card" onclick="showFAQCategory('menu')">
+                            <div class="category-card-icon">🍹</div>
+                            <h3 class="category-card-title">Menus</h3>
+                            <p class="category-card-desc">View our menu</p>
+                            <div class="category-card-count">1 question</div>
+                        </div>
+
+                        <div class="faq-category-card" onclick="showFAQCategory('locations')">
+                            <div class="category-card-icon">📍</div>
+                            <h3 class="category-card-title">Where to Find Our Teas</h3>
+                            <p class="category-card-desc">Cafes, schools, stores & locations</p>
+                            <div class="category-card-count">4 questions</div>
+                        </div>
+
+                        <div class="faq-category-card" onclick="showFAQCategory('diy')">
+                            <div class="category-card-icon">📦</div>
+                            <h3 class="category-card-title">DIY Kits</h3>
+                            <p class="category-card-desc">Fruit tea & milk tea kits</p>
+                            <div class="category-card-count">1 question</div>
+                        </div>
+
+                        <div class="faq-category-card" onclick="showFAQCategory('catering')">
+                            <div class="category-card-icon">🎉</div>
+                            <h3 class="category-card-title">Catering</h3>
+                            <p class="category-card-desc">Event services & requirements</p>
+                            <div class="category-card-count">3 questions</div>
+                        </div>
+
+                        <div class="faq-category-card" onclick="showFAQCategory('giftcards')">
+                            <div class="category-card-icon">🎁</div>
+                            <h3 class="category-card-title">Gift Cards</h3>
+                            <p class="category-card-desc">Purchase, usage & policies</p>
+                            <div class="category-card-count">2 questions</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ Questions Container (Hidden by default) -->
+                <div class="faq-questions-container" id="faq-questions-container" style="display: none;">
+                    <button class="faq-back-button" onclick="backToCategories()">
+                        <span>←</span> Back to Categories
+                    </button>
+                    <h2 class="faq-questions-title" id="faq-questions-title"></h2>
+                
+                <!-- General FAQs -->
+                <div class="faq-category" data-category="general">
+                    <h3 class="faq-category-title">GENERAL QUESTIONS</h3>
+                    <div class="faq-accordion">
+                        <div class="faq-item">
+                            <button class="faq-question" onclick="toggleFAQ(this)">
+                                <span>Hours</span>
+                                <span class="faq-arrow">▼</span>
+                            </button>
+                            <div class="faq-answer">
+                                <p>Sunday – Thursday: 11am – 7:30pm<br>Friday & Saturday: 11am – 8:00pm</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <button class="faq-question" onclick="toggleFAQ(this)">
+                                <span>Are you Halal?</span>
+                                <span class="faq-arrow">▼</span>
+                            </button>
+                            <div class="faq-answer">
+                                <p>Yes, ZAMHA CERTIFIED.</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <button class="faq-question" onclick="toggleFAQ(this)">
+                                <span>Do you offer delivery?</span>
+                                <span class="faq-arrow">▼</span>
+                            </button>
+                            <div class="faq-answer">
+                                <p>No, but you may send your own delivery service to pickup the order.</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <button class="faq-question" onclick="toggleFAQ(this)">
+                                <span>Modes of payment accepted?</span>
+                                <span class="faq-arrow">▼</span>
+                            </button>
+                            <div class="faq-answer">
+                                <p>Cash, Swipe, Mobile Money, Gift Voucher</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <button class="faq-question" onclick="toggleFAQ(this)">
+                                <span>Do your tea's have caffeine?</span>
+                                <span class="faq-arrow">▼</span>
+                            </button>
+                            <div class="faq-answer">
+                                <p>Rooibos teas have a very small amount of caffeine, milk teas have no caffeine.</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <button class="faq-question" onclick="toggleFAQ(this)">
+                                <span>Do you offer milk substitutes?</span>
+                                <span class="faq-arrow">▼</span>
+                            </button>
+                            <div class="faq-answer">
+                                <p>Yes, we offer almond milk.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Menu & Orders FAQs -->
+                <div class="faq-category" data-category="menu">
+                    <h3 class="faq-category-title">MENUS</h3>
+                    <div class="faq-accordion">
+                        <div class="faq-item">
+                            <button class="faq-question" onclick="toggleFAQ(this)">
+                                <span>Please find attached menu below</span>
+                                <span class="faq-arrow">▼</span>
+                            </button>
+                            <div class="faq-answer">
+                                <p>Please refer to our menu section above to view all available drinks and items.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Where to Find Our Teas -->
+                <div class="faq-category" data-category="locations">
+                    <h3 class="faq-category-title">WHERE CAN YOU FIND OUR TEAS?</h3>
+                    <div class="faq-accordion">
+                        <div class="faq-item">
+                            <button class="faq-question" onclick="toggleFAQ(this)">
+                                <span>Cafes</span>
+                                <span class="faq-arrow">▼</span>
+                            </button>
+                            <div class="faq-answer">
+                                <p><strong>Brew Me</strong> (Garden City Mall)<br>
+                                <strong>The Cake Couture</strong> (Kabulonga)<br>
+                                <strong>Courtside Cafe</strong> (Lilayi)</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <button class="faq-question" onclick="toggleFAQ(this)">
+                                <span>Schools</span>
+                                <span class="faq-arrow">▼</span>
+                            </button>
+                            <div class="faq-answer">
+                                <p><strong>International School of Lusaka Tuckshop</strong> (ISL)<br>
+                                <strong>Lycée Français International of Lusaka</strong> (French International School of Lusaka)</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <button class="faq-question" onclick="toggleFAQ(this)">
+                                <span>Grocery Stores</span>
+                                <span class="faq-arrow">▼</span>
+                            </button>
+                            <div class="faq-answer">
+                                <p><strong>Melissa's</strong> (Kabulonga)</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <button class="faq-question" onclick="toggleFAQ(this)">
+                                <span>Ndola</span>
+                                <span class="faq-arrow">▼</span>
+                            </button>
+                            <div class="faq-answer">
+                                <p><strong>Gigibonta</strong> (Jacaranda Mall)<br>
+                                <strong>Gigibonta</strong> (Kansenshi Mall)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DIY Kits -->
+                <div class="faq-category" data-category="diy">
+                    <h3 class="faq-category-title">DIY KITS</h3>
+                    <div class="faq-accordion">
+                        <div class="faq-item">
+                            <button class="faq-question" onclick="toggleFAQ(this)">
+                                <span>DIY Kits Information</span>
+                                <span class="faq-arrow">▼</span>
+                            </button>
+                            <div class="faq-answer">
+                                <p><strong>Available Kits:</strong> Fruit Tea and Milk Tea<br>
+                                <strong>Sizes:</strong> 4 Cups or 8 Cups<br>
+                                <strong>Delivery:</strong> Delivery fee paid upon delivery</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Catering FAQs -->
+                <div class="faq-category" data-category="catering">
+                    <h3 class="faq-category-title">CATERING</h3>
+                    <div class="faq-accordion">
+                        <div class="faq-item">
+                            <button class="faq-question" onclick="toggleFAQ(this)">
+                                <span>How far in advance should I book catering?</span>
+                                <span class="faq-arrow">▼</span>
+                            </button>
+                            <div class="faq-answer">
+                                <p>All catering orders must be placed at least <strong>48 hours</strong> in advance. See <strong>Catering</strong> for full terms.</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <button class="faq-question" onclick="toggleFAQ(this)">
+                                <span>What is the minimum order for catering?</span>
+                                <span class="faq-arrow">▼</span>
+                            </button>
+                            <div class="faq-answer">
+                                <p>A minimum of <strong>20 drinks</strong> per order is required. Maximum of <strong>4 flavors</strong> per 20 drinks; additional flavors may be subject to approval and availability.</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <button class="faq-question" onclick="toggleFAQ(this)">
+                                <span>Do you provide staff for catering events?</span>
+                                <span class="faq-arrow">▼</span>
+                            </button>
+                            <div class="faq-answer">
+                                <p>We offer <strong>on-site setup</strong> for events. Please send an inquiry in advance for availability, pricing, and setup requirements.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gift Cards FAQs -->
+                <div class="faq-category" data-category="giftcards">
+                    <h3 class="faq-category-title">GIFT CARDS</h3>
+                    <div class="faq-accordion">
+                        <div class="faq-item">
+                            <button class="faq-question" onclick="toggleFAQ(this)">
+                                <span>Do gift cards expire?</span>
+                                <span class="faq-arrow">▼</span>
+                            </button>
+                            <div class="faq-answer">
+                                <p>This is a placeholder answer. Replace with your gift card expiration policy and any terms and conditions.</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <button class="faq-question" onclick="toggleFAQ(this)">
+                                <span>Can I use gift cards for catering orders?</span>
+                                <span class="faq-arrow">▼</span>
+                            </button>
+                            <div class="faq-answer">
+                                <p>This is a placeholder answer. Replace with information about where and how gift cards can be redeemed.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                </div><!-- Close faq-questions-container -->
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Drink Detail Modal -->
+    <div class="drink-modal" id="drink-modal">
+        <div class="drink-modal-overlay"></div>
+        <div class="drink-modal-content">
+            <button class="drink-modal-close" id="close-drink-modal">&times;</button>
+            <div class="drink-modal-inner">
+                <div class="drink-modal-image">
+                    <div class="drink-modal-icon"></div>
+                    <div class="drink-modal-gallery" style="display: none;">
+                        <button type="button" class="drink-modal-arrow drink-modal-prev" aria-label="Previous image">‹</button>
+                        <img class="drink-modal-photo" src="" alt="" />
+                        <button type="button" class="drink-modal-arrow drink-modal-next" aria-label="Next image">›</button>
+                        <span class="drink-modal-photo-counter"></span>
+                    </div>
+                </div>
+                <div class="drink-modal-details">
+                    <span class="drink-modal-category"></span>
+                    <h2 class="drink-modal-name"></h2>
+                    <p class="drink-modal-price"></p>
+                    <p class="drink-modal-description"></p>
+                    <div class="drink-modal-tags"></div>
+                    <div class="drink-modal-specs">
+                        <div class="spec-item">
+                            <span class="spec-label">Base</span>
+                            <span class="spec-value"></span>
+                        </div>
+                        <div class="spec-item spec-item-addon">
+                            <span class="spec-label">Flavor</span>
+                            <span class="spec-value"></span>
+                        </div>
+                        <div class="spec-item spec-item-addon">
+                            <span class="spec-label">Texture</span>
+                            <span class="spec-value"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>BUBBLE & SHAKE</h3>
+                    <p>Premium Bubble Tea & Artisan Shakes</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#menu">Menu</a></li>
+                        <li><a href="#about">Info</a></li>
+                        <li><a href="#gallery">Gallery</a></li>
+                        <li><a href="#catering">Catering</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Follow Us</h4>
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/bubbleandshake/" target="_blank" rel="noopener noreferrer">Instagram</a>
+                        <a href="https://www.facebook.com/bubbleandshake/" target="_blank" rel="noopener noreferrer">Facebook</a>
+                        <a href="https://x.com/bubbleandshake" target="_blank" rel="noopener noreferrer">Twitter</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Bubble & Shake. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Success Notification Modal -->
+    <div class="notification-modal" id="notification-modal">
+        <div class="notification-content">
+            <div class="notification-icon" id="notification-icon">✓</div>
+            <h2 class="notification-title" id="notification-title">Success!</h2>
+            <p class="notification-message" id="notification-message">Your request has been received.</p>
+            <button class="notification-button" onclick="closeNotification()">OK</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+

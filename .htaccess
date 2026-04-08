@@ -1,0 +1,150 @@
+# ==========================================
+# SECURITY CONFIGURATION FOR APACHE SERVER
+# ==========================================
+# This file provides security headers and protection
+# Only works with Apache servers (most shared hosting)
+# ==========================================
+
+# Enable RewriteEngine
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    
+    # Force HTTPS (redirect HTTP to HTTPS)
+    RewriteCond %{HTTPS} off
+    RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+    
+    # Prevent access to sensitive files
+    RewriteRule ^(.*/)?\.git/ - [F,L]
+    RewriteRule ^(.*/)?\.env - [F,L]
+    RewriteRule ^(.*/)?\.htaccess - [F,L]
+</IfModule>
+
+# ==========================================
+# SECURITY HEADERS
+# ==========================================
+
+<IfModule mod_headers.c>
+    # Prevent clickjacking attacks
+    Header always set X-Frame-Options "SAMEORIGIN"
+    
+    # XSS Protection
+    Header always set X-XSS-Protection "1; mode=block"
+    
+    # Prevent MIME type sniffing
+    Header always set X-Content-Type-Options "nosniff"
+    
+    # Referrer Policy
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    
+    # Content Security Policy (additional layer)
+    Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdn.emailjs.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://api.emailjs.com; frame-ancestors 'self';"
+    
+    # Permissions Policy (disable unnecessary features)
+    Header always set Permissions-Policy "geolocation=(), microphone=(), camera=(), payment=(), usb=(), magnetometer=(), gyroscope=()"
+    
+    # Strict Transport Security (HSTS) - Force HTTPS for 1 year
+    Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+    
+    # Remove server signature
+    Header unset Server
+    Header unset X-Powered-By
+</IfModule>
+
+# ==========================================
+# DISABLE DIRECTORY BROWSING
+# ==========================================
+Options -Indexes
+
+# ==========================================
+# PROTECT SENSITIVE FILES
+# ==========================================
+<FilesMatch "\.(htaccess|htpasswd|ini|log|sh|sql|md)$">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
+# ==========================================
+# FILE UPLOAD PROTECTION
+# ==========================================
+# Prevent execution of uploaded PHP files
+<FilesMatch "\.php$">
+    <If "%{REQUEST_URI} =~ m#/uploads/#">
+        Order Allow,Deny
+        Deny from all
+    </If>
+</FilesMatch>
+
+# ==========================================
+# DISABLE PHP EXECUTION IN UPLOADS (if you add uploads)
+# ==========================================
+<Directory "uploads">
+    php_flag engine off
+    RemoveHandler .php .phtml .php3
+    RemoveType .php .phtml .php3
+</Directory>
+
+# ==========================================
+# RATE LIMITING (Basic - Prevents DDoS)
+# ==========================================
+<IfModule mod_evasive.c>
+    DOSHashTableSize 3097
+    DOSPageCount 5
+    DOSSiteCount 50
+    DOSPageInterval 1
+    DOSSiteInterval 1
+    DOSBlockingPeriod 60
+</IfModule>
+
+# ==========================================
+# ENABLE COMPRESSION (Performance)
+# ==========================================
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json
+</IfModule>
+
+# ==========================================
+# BROWSER CACHING (Performance)
+# ==========================================
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType text/javascript "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/gif "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
+    ExpiresByType application/font-woff "access plus 1 year"
+    ExpiresByType application/font-woff2 "access plus 1 year"
+</IfModule>
+
+# ==========================================
+# BLOCK BAD BOTS AND SCRAPERS
+# ==========================================
+<IfModule mod_rewrite.c>
+    RewriteCond %{HTTP_USER_AGENT} (libwww|wget|python|nikto|curl|scan|java|winhttp|clshttp|loader) [NC,OR]
+    RewriteCond %{HTTP_USER_AGENT} (bot|spider|crawler|scraper) [NC]
+    RewriteCond %{HTTP_USER_AGENT} !(googlebot|bingbot) [NC]
+    RewriteRule .* - [F,L]
+</IfModule>
+
+# ==========================================
+# PREVENT SQL INJECTION
+# ==========================================
+<IfModule mod_rewrite.c>
+    RewriteCond %{QUERY_STRING} (union|select|insert|drop|grant|delete|update|concat) [NC,OR]
+    RewriteCond %{QUERY_STRING} [a-zA-Z0-9_]=http:// [OR]
+    RewriteCond %{QUERY_STRING} [a-zA-Z0-9_]=(\.\.//?)+ [OR]
+    RewriteCond %{QUERY_STRING} [a-zA-Z0-9_]=/([a-z0-9_.]//?)+ [NC]
+    RewriteRule .* - [F]
+</IfModule>
+
+# ==========================================
+# CUSTOM ERROR PAGES (Optional)
+# ==========================================
+# ErrorDocument 400 /error-400.html
+# ErrorDocument 401 /error-401.html
+# ErrorDocument 403 /error-403.html
+# ErrorDocument 404 /error-404.html
+# ErrorDocument 500 /error-500.html
+

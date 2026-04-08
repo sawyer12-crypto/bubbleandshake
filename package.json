@@ -1,0 +1,20 @@
+{
+  "name": "bubble-and-shake-website",
+  "version": "1.0.0",
+  "description": "A modern website for Bubble & Shake - Premium Bubble Tea & Shakes",
+  "main": "index.html",
+  "scripts": {
+    "start": "python3 server.py",
+    "dev": "python3 server.py"
+  },
+  "keywords": [
+    "bubble-tea",
+    "boba",
+    "shakes",
+    "website",
+    "restaurant"
+  ],
+  "author": "Bubble & Shake Team",
+  "license": "MIT"
+}
+
